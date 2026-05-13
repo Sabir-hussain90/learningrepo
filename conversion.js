@@ -1,0 +1,17 @@
+let  value= "67";
+let convertedvalue=Number(value);
+console.log(typeof(convertedvalue));
+let sabir="454";
+let convertvalue=Number(sabir);
+console.log(typeof(convertvalue));
+let yt= "yellow";
+let convertvalues=Number(yt);
+console.log(typeof(convertvalues));
+let u=54;
+let convertvvules=String(u);
+console.log(typeof(convertvvules));
+let sd="56";
+console.log(typeof(sd),(sd));
+let hh=false;
+let convertvvuules=Number(hh);
+console.log(typeof(convertvvuules),(convertvvules));
