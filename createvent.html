@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix Code</title>
+</head>
+<body>
+
+    <div id="container"></div>
+
+    <button id="clickbutton">click me</button>
+
+    <script>
+        const button = document.getElementById("clickbutton");
+        const container = document.getElementById("container");
+
+        button.addEventListener("click", () => {
+            const el = document.createElement("h1");
+            el.innerText = "sabir hussain";
+            container.appendChild(el);
+        });
+    </script>
+
+</body>
+</html>
