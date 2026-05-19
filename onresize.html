@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>onresize</title>
+</head>
+<body onresize="body()">
+    <p id="res"></p>
+    
+    sri
+    <script>
+    function body(){
+        var x=window.outerHeight;
+        var y=window.outerWidth;
+        var z="height is"+x+"and"+"width is"+y;
+        document.getElementById("res").innerHTML=z;
+    }
+
+    </script>
+</body>
+</html>
