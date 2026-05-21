@@ -1,0 +1,16 @@
+<!doctype html>
+<body>
+<input>
+
+<script>
+  let input = document.querySelector('input');
+
+  
+  input.setAttribute('id', 'id');
+  alert(input.id); // id (updated)
+
+  // property => attribute
+  input.id = 'newId';
+  alert(input.getAttribute('id')); 
+</script>
+</body>
