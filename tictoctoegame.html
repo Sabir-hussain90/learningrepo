@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe Game</title>
+
+    <style>
+
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: lightgray;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container{
+            text-align: center;
+        }
+
+        h1{
+            margin-bottom: 20px;
+        }
+
+        .grid{
+            display: grid;
+            grid-template-columns: repeat(3,100px);
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .column{
+            height: 100px;
+            width: 100px;
+            background-color: white;
+            border: 2px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        #status{
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        button{
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Tic Tac Toe</h1>
+
+        <div class="grid">
+
+            <div class="column" data-index="0"></div>
+            <div class="column" data-index="1"></div>
+            <div class="column" data-index="2"></div>
+
+            <div class="column" data-index="3"></div>
+            <div class="column" data-index="4"></div>
+            <div class="column" data-index="5"></div>
+
+            <div class="column" data-index="6"></div>
+            <div class="column" data-index="7"></div>
+            <div class="column" data-index="8"></div>
+
+        </div>
+
+        <div id="status">
+            Player X Turn
+        </div>
+
+        <button onclick="restartGame()">Restart Game</button>
+
+    </div>
+
+    <script>
+
+        let boxes = document.querySelectorAll(".column");
+        let statusText = document.getElementById("status");
+
+        let currentPlayer = "X";
+        let gameActive = true;
+
+        let board = ["", "", "", "", "", "", "", "", ""];
+
+        let winningConditions = [
+
+            [0,1,2],
+            [3,4,5],
+            [6,7,8],
+
+            [0,3,6],
+            [1,4,7],
+            [2,5,8],
+
+            [0,4,8],
+            [2,4,6]
+
+        ];
+
+        boxes.forEach((box,index)=>{
+
+            box.addEventListener("click",()=>{
+
+                if(board[index] != "" || gameActive == false){
+                    return;
+                }
+
+                board[index] = currentPlayer;
+                box.innerHTML = currentPlayer;
+
+                checkWinner();
+
+            });
+
+        });
+
+        function checkWinner(){
+
+            let winnerFound = false;
+
+            for(let condition of winningConditions){
+
+                let a = condition[0];
+                let b = condition[1];
+                let c = condition[2];
+
+                if(
+                    board[a] != "" &&
+                    board[a] == board[b] &&
+                    board[a] == board[c]
+                ){
+
+                    winnerFound = true;
+                    break;
+
+                }
+
+            }
+
+            if(winnerFound){
+
+                statusText.innerHTML = "Player " + currentPlayer + " Wins!";
+                gameActive = false;
+                return;
+
+            }
+
+            if(!board.includes("")){
+
+                statusText.innerHTML = "Game Draw!";
+                gameActive = false;
+                return;
+
+            }
+
+            currentPlayer = currentPlayer == "X" ? "O" : "X";
+
+            statusText.innerHTML = "Player " + currentPlayer + " Turn";
+
+        }
+
+        function restartGame(){
+
+            board = ["", "", "", "", "", "", "", "", ""];
+            currentPlayer = "X";
+            gameActive = true;
+
+            statusText.innerHTML = "Player X Turn";
+
+            boxes.forEach((box)=>{
+
+                box.innerHTML = "";
+
+            });
+
+        }
+
+    </script>
+
+</body>
+</html>
