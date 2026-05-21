@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Color Guess Game</title>
+
+  <style>
+    body{
+      font-family: Arial;
+      background: #f2f2f2;
+      text-align: center;
+      padding-top: 30px;
+    }
+
+    h1{
+      color: darkblue;
+    }
+
+    #colorBox{
+      width: 250px;
+      height: 250px;
+      margin: 20px auto;
+      border-radius: 15px;
+      border: 4px solid black;
+    }
+
+    .btn{
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      background-color: darkblue;
+      color: white;
+    }
+
+    .optionBtn{
+      display: block;
+      width: 200px;
+      margin: 10px auto;
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      background-color: white;
+      border: 2px solid black;
+    }
+
+    #result{
+      font-size: 22px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    #score{
+      font-size: 24px;
+      color: green;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>🎨 Color Guess Game</h1>
+
+  <h2 id="question">Question: 1 / 10</h2>
+
+  <div id="colorBox"></div>
+
+  <div id="options"></div>
+
+  <h2 id="score">Score: 0</h2>
+
+  <h2 id="result"></h2>
+
+  <script>
+
+    let colors = [
+      "red",
+      "blue",
+      "green",
+      "yellow",
+      "orange",
+      "purple",
+      "pink",
+      "black",
+      "brown",
+      "gray"
+    ];
+
+    let score = 0;
+    let questionNumber = 1;
+    let correctColor = "";
+
+    function startGame(){
+
+      if(questionNumber > 10){
+
+        let message = "";
+
+        if(score >= 8){
+          message = "🔥 Nice Gamer!";
+        }
+        else if(score >= 5){
+          message = "✅ You Passed!";
+        }
+        else{
+          message = "❌ You Failed!";
+        }
+
+        document.body.innerHTML = `
+          <h1>Game Finished</h1>
+          <h2>Your Score: ${score} / 10</h2>
+          <h2>${message}</h2>
+          <button class="btn" onclick="location.reload()">Play Again</button>
+        `;
+
+        return;
+      }
+
+      document.getElementById("question").innerText =
+        "Question: " + questionNumber + " / 10";
+
+      let randomIndex = Math.floor(Math.random() * colors.length);
+
+      correctColor = colors[randomIndex];
+
+      document.getElementById("colorBox").style.backgroundColor =
+        correctColor;
+
+      let optionsHTML = "";
+
+      let shuffled = [...colors].sort(() => 0.5 - Math.random());
+
+      let selectedOptions = shuffled.slice(0,4);
+
+      if(!selectedOptions.includes(correctColor)){
+        selectedOptions[0] = correctColor;
+      }
+
+      selectedOptions = selectedOptions.sort(() => 0.5 - Math.random());
+
+      selectedOptions.forEach(function(color){
+
+        optionsHTML += `
+          <button class="optionBtn"
+            onclick="checkAnswer('${color}')">
+            ${color.toUpperCase()}
+          </button>
+        `;
+      });
+
+      document.getElementById("options").innerHTML = optionsHTML;
+    }
+
+    function checkAnswer(selected){
+
+      if(selected === correctColor){
+
+        score++;
+
+        document.getElementById("result").innerHTML =
+          "✅ Correct Answer!";
+      }
+      else{
+
+        document.getElementById("result").innerHTML =
+          "❌ Wrong! Correct Color was " + correctColor.toUpperCase();
+      }
+
+      document.getElementById("score").innerText =
+        "Score: " + score;
+
+      questionNumber++;
+
+      setTimeout(startGame, 1000);
+    }
+
+    startGame();
+
+  </script>
+
+</body>
+</html>
