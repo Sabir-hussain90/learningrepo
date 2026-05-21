@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Analog Clock</title>
+
+    <style>
+
+        /* =========================
+           BODY STYLE
+        ========================== */
+        body{
+            margin:0;
+            padding:0;
+
+            height:100vh;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            background-color:#dbefff;
+
+            font-family:Arial, sans-serif;
+        }
+
+        /* =========================
+           CLOCK CONTAINER
+        ========================== */
+        .clock{
+            width:400px;
+            height:400px;
+
+            border:10px solid black;
+            border-radius:50%;
+
+            background-color:white;
+
+            position:relative;
+        }
+
+        /* =========================
+           CENTER DOT
+        ========================== */
+        .center{
+            width:18px;
+            height:18px;
+
+            background:black;
+
+            border-radius:50%;
+
+            position:absolute;
+
+            top:50%;
+            left:50%;
+
+            transform:translate(-50%, -50%);
+
+            z-index:100;
+        }
+
+        /* =========================
+           COMMON HAND STYLE
+        ========================== */
+        .hand{
+            position:absolute;
+
+            bottom:50%;
+            left:50%;
+
+            transform-origin:bottom;
+            transform:translateX(-50%) rotate(0deg);
+
+            border-radius:5px;
+        }
+
+        /* Hour Hand */
+        .hour{
+            width:8px;
+            height:90px;
+
+            background:black;
+
+            z-index:10;
+        }
+
+        /* Minute Hand */
+        .minute{
+            width:6px;
+            height:130px;
+
+            background:blue;
+
+            z-index:11;
+        }
+
+        /* Second Hand */
+        .second{
+            width:3px;
+            height:150px;
+
+            background:red;
+
+            z-index:12;
+        }
+
+        /* =========================
+           CLOCK NUMBERS
+        ========================== */
+        .number{
+            position:absolute;
+
+            font-size:28px;
+            font-weight:bold;
+
+            color:black;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         ANALOG CLOCK
+    ========================== -->
+    <div class="clock" id="clock">
+
+        <!-- Clock Hands -->
+        <div class="hand hour" id="hour"></div>
+        <div class="hand minute" id="minute"></div>
+        <div class="hand second" id="second"></div>
+
+        <!-- Center Dot -->
+        <div class="center"></div>
+
+    </div>
+
+    <script>
+
+        /* =========================
+           CLOCK ELEMENTS
+        ========================== */
+        const clock = document.getElementById("clock");
+
+        const hourHand = document.getElementById("hour");
+        const minuteHand = document.getElementById("minute");
+        const secondHand = document.getElementById("second");
+
+        /* =========================
+           CREATE CLOCK NUMBERS
+        ========================== */
+
+        for(let number = 1; number <= 12; number++){
+
+            // Create Number Element
+            const num = document.createElement("div");
+
+            // Add Class
+            num.className = "number";
+
+            // Add Number Text
+            num.innerText = number;
+
+            // Calculate Angle
+            const angle = (number * 30) * Math.PI / 180;
+
+            // Clock Radius
+            const radius = 160;
+
+            // X Position
+            const x =
+                200 + radius * Math.sin(angle);
+
+            // Y Position
+            const y =
+                200 - radius * Math.cos(angle);
+
+            // Apply Position
+            num.style.left = `${x - 12}px`;
+            num.style.top = `${y - 15}px`;
+
+            // Add Number to Clock
+            clock.appendChild(num);
+        }
+
+        /* =========================
+           TICK SOUND
+        ========================== */
+
+        function playTick(){
+
+            // Create Audio Context
+            const audioContext =
+                new (window.AudioContext || window.webkitAudioContext)();
+
+            // Oscillator
+            const oscillator =
+                audioContext.createOscillator();
+
+            // Volume
+            const gainNode =
+                audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = 800;
+
+            gainNode.gain.value = 0.03;
+
+            oscillator.start();
+
+            oscillator.stop(audioContext.currentTime + 0.03);
+        }
+
+        /* =========================
+           UPDATE CLOCK FUNCTION
+        ========================== */
+
+        function updateClock(){
+
+            // Current Time
+            const now = new Date();
+
+            // Get Time Values
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            /* =========================
+               HAND ROTATIONS
+            ========================== */
+
+            // Hour Rotation
+            const hourRotation =
+                (hours % 12) * 30 + minutes * 0.5;
+
+            // Minute Rotation
+            const minuteRotation =
+                minutes * 6;
+
+            // Second Rotation
+            const secondRotation =
+                seconds * 6;
+
+            /* =========================
+               APPLY ROTATIONS
+            ========================== */
+
+            hourHand.style.transform =
+                `translateX(-50%) rotate(${hourRotation}deg)`;
+
+            minuteHand.style.transform =
+                `translateX(-50%) rotate(${minuteRotation}deg)`;
+
+            secondHand.style.transform =
+                `translateX(-50%) rotate(${secondRotation}deg)`;
+
+            // Tick Sound
+            playTick();
+        }
+
+        /* =========================
+           RUN CLOCK
+        ========================== */
+
+        setInterval(updateClock, 1000);
+
+        // Run Immediately
+        updateClock();
+
+    </script>
+
+</body>
+</html>
