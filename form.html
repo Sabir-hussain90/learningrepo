@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Example</title>
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+
+<h2>User Registration Form</h2>
+
+<form id="myForm">
+
+    <label>Name:</label>
+    <input type="text" id="name"><br><br>
+
+    <label>Email:</label>
+    <input type="email" id="email"><br><br>
+
+    <label>Password:</label>
+    <input type="password" id="password"><br><br>
+
+    <label>Gender:</label>
+    <input type="radio" name="gender" value="Male"> Male
+    <input type="radio" name="gender" value="Female"> Female
+    <br><br>
+
+    <label>Country:</label>
+    <select id="country">
+        <option>Pakistan</option>
+        <option>India</option>
+        <option>China</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+
+</form>
+
+<p id="output"></p>
+
+<script src="form.js"></script>
+
+</body>
+</html>
