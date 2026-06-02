@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Form Events Demo</h2>
+
+<input type="text" id="box" placeholder="Type here">
+
+<script>
+let box = document.getElementById("box");
+
+// INPUT
+box.addEventListener("input", function () {
+    console.log("Input Event:", this.value);
+});
+
+// CHANGE
+box.addEventListener("change", function () {
+    console.log("Change Event:", this.value);
+});
+
+// COPY
+box.addEventListener("copy", function () {
+    console.log("Copied!");
+});
+
+// PASTE
+box.addEventListener("paste", function () {
+    console.log("Pasted!");
+});
+
+// CUT
+box.addEventListener("cut", function () {
+    console.log("Cut!");
+});
+
+// NAVIGATION EVENT
+window.addEventListener("load", function () {
+    console.log("Page Loaded Successfully");
+});
+</script>
+
+</body>
+</html>
