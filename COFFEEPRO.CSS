@@ -1,0 +1,114 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Navbar */
+header {
+    background: black;
+    color: white;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Sections */
+.section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+#home {
+    background: #f4e1d2;
+    min-height: 400px;
+}
+
+#home h2 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+/* Button */
+button {
+    padding: 12px 25px;
+    background: #4b2e2e;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #6b3f3f;
+}
+
+/* Cards */
+.card {
+    width: 250px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f7f7f7;
+    border-radius: 10px;
+}
+
+/* Gallery */
+.gallery {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.gallery img {
+    width: 300px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Contact */
+form {
+    width: 400px;
+    margin: auto;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+footer {
+    background: #4b2e2e;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
