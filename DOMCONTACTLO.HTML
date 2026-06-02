@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loading Events Demo</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        img {
+            width: 150px;
+            margin: 20px;
+        }
+
+        iframe {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>JavaScript Loading Events</h2>
+
+<img src="https://via.placeholder.com/150" id="myImg">
+
+<iframe src="https://example.com" id="myFrame" width="300" height="200"></iframe>
+
+<script>
+/* =======================
+   READY STATE
+======================= */
+console.log("[1] Initial readyState:", document.readyState);
+
+document.onreadystatechange = function () {
+    console.log("[STATE] readyState:", document.readyState);
+};
+
+/* =======================
+   DOM CONTENT LOADED
+======================= */
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("[2] DOMContentLoaded fired");
+});
+
+/* =======================
+   WINDOW LOAD
+======================= */
+window.addEventListener("load", function () {
+    console.log("[4] Window fully loaded");
+});
+
+/* =======================
+   IMAGE LOAD
+======================= */
+let img = document.getElementById("myImg");
+img.onload = function () {
+    console.log("[4] Image loaded");
+};
+
+/* =======================
+   IFRAME LOAD
+======================= */
+let frame = document.getElementById("myFrame");
+frame.onload = function () {
+    console.log("[3] Iframe loaded");
+};
+</script>
+
+</body>
+</html>
