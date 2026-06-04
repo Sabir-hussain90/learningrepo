@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+        let newWin=window.open("about:blank","hello",width=200,height=100);
+        newWin.document.write(
+            "<script'>window.opener.document.body.innerHTML='test'<\/script>"
+        )
+    </script>
+    
+</body>
+</html>
