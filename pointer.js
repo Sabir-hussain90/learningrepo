@@ -13,6 +13,7 @@ box.addEventListener("pointerdown", function () {
     output.textContent = "Event: Pointer Down";
 });
 
+
 box.addEventListener("pointerup", function () {
     output.textContent = "Event: Pointer Up";
 });
