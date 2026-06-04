@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="text">Hello</p>
+
+<button onclick="changeText()">Change Text</button>
+
+<script>
+const textNode = document.getElementById("text").firstChild;
+
+const observer = new MutationObserver(function(mutations) {
+    console.log("Text Changed");
+});
+
+observer.observe(textNode, {
+    characterData: true
+});
+
+function changeText() {
+    textNode.textContent = "Welcome";
+}
+</script>
+
+</body>
+</html>
