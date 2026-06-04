@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="container"></div>
+<button onclick="addElement()">Add Element</button>
+
+<script>
+const target = document.getElementById("container");
+
+const observer = new MutationObserver(function(mutations) {
+    console.log("Child element added or removed");
+});
+
+observer.observe(target, {
+    childList: true
+});
+
+function addElement() {
+    let p = document.createElement("p");
+    p.innerText = "New Paragraph";
+    target.appendChild(p);
+}
+</script>
+
+</body>
+</html>
