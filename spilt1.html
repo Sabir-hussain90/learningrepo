@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<script>
+"use strict";
+
+let i = 0;
+
+let start = Date.now();
+
+function count() {
+
+  // do a heavy job
+  for (let j = 0; j < 1e9; j++) {
+    i++;
+  }
+
+  alert("Done in " + (Date.now() - start) + 'ms');
+}
+
+count();
+</script>
+    
+</body>
+</html>
