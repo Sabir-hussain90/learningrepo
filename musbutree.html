@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="parent">
+    <div id="child"></div>
+</div>
+
+<button onclick="addChild()">Add Child</button>
+
+<script>
+const parent = document.getElementById("parent");
+
+const observer = new MutationObserver(function(mutations) {
+    console.log("Subtree Changed");
+});
+
+observer.observe(parent, {
+    childList: true,
+    subtree: true
+});
+
+function addChild() {
+    let p = document.createElement("p");
+    p.innerText = "New Child";
+    document.getElementById("child").appendChild(p);
+}
+</script>
+
+</body>
+</html>
