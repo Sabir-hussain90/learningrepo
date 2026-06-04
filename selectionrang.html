@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selection Example</title>
+</head>
+<body>
+    <p id="p">Select Me:<i>italic</i>and <b>bold</b></p>
+
+    cloned: <span id="cloned"></span>
+    <br>
+    text: <span id="astext"></span>
+
+    <script>
+        document.onselectionchange = function () {
+            let selection = document.getSelection();
+
+            cloned.innerHTML = "";
+            astext.innerHTML = "";
+
+            for (let i = 0; i < selection.rangeCount; i++) {
+                cloned.append(
+                    selection.getRangeAt(i).cloneContents()
+                );
+            }
+
+            astext.innerHTML += selection;
+        };
+    </script>
+</body>
+</html>
