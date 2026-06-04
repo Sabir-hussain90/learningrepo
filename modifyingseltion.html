@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="input" style="width:80%;height:60ox" value="As you select the letter or word it tel>.">
+    <button id="button">selection process</button>
+    <script>
+        button.onclick=()=>{
+            if(inputselectionStart==input.selectionEnd){
+                return;
+            }
+            let selected=input.value.slice(input.selectionStart,input.selectionEnd);
+            input.setRangeText(`*${selected}*`);}
+    </script>
+    
+</body>
+</html>
