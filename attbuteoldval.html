@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="box" class="red">Box</div>
+
+<button onclick="changeClass()">Change Class</button>
+
+<script>
+const box = document.getElementById("box");
+
+const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+        console.log("Old Class:", mutation.oldValue);
+    });
+});
+
+observer.observe(box, {
+    attributes: true,
+    attributeOldValue: true
+});
+
+function changeClass() {
+    box.className = "blue";
+}
+</script>
+
+</body>
+</html>
