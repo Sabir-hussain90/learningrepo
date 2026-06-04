@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mutation Observer</title>
+
+<style>
+.parent-div{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.div1,.div2,.div3{
+    width:100px;
+    height:100px;
+    background-color:lightblue;
+}
+</style>
+
+</head>
+<body>
+
+<h1>Mutation Observer</h1>
+
+<div id="elem" class="parent-div">
+    <div class="div1">div1</div>
+    <div class="div2">div2</div>
+    <div class="div3">div3</div>
+</div>
+
+<button onclick="deleteDiv()">Delete Div</button>
+
+<script>
+
+let elem = document.getElementById("elem");
+
+let observer = new MutationObserver((mutations)=>{
+    console.log(mutations);
+});
+
+observer.observe(elem,{
+    childList:true
+});
+
+function deleteDiv(){
+    if(elem.lastElementChild){
+        elem.removeChild(elem.lastElementChild);
+    }
+}
+
+</script>
+
+</body>
+</html>
