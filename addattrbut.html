@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="box" style="width:100px;height:100px;background:red;"></div>
+
+<button onclick="changeColor()">Change Color</button>
+
+<script>
+const box = document.getElementById("box");
+
+const observer = new MutationObserver(function(mutations) {
+    console.log("Attribute Changed");
+});
+
+observer.observe(box, {
+    attributes: true
+});
+
+function changeColor() {
+    box.style.background = "blue";
+}
+</script>
+
+</body>
+</html>
