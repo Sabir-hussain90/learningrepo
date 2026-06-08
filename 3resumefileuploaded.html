@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Upload</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .container {
+            width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Upload Your Resume</h2>
+        <input type="file" id="resumeFile" accept=".pdf,.doc,.docx">
+
+        <br><br>
+        <button onclick="uploadResume()">Upload Resume</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        function uploadResume() {
+            let fileInput = document.getElementById("resumeFile");
+            let result = document.getElementById("result");
+            if (fileInput.files.length === 0) {
+                result.innerHTML = "Please select a resume file.";
+                return;
+            }
+            let file = fileInput.files[0];
+            let allowedTypes = [
+                "application/pdf",
+                "application/msword",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            ];
+            if (!allowedTypes.includes(file.type)) {
+                result.innerHTML = "Only PDF, DOC, and DOCX files are allowed.";
+                return;
+            }
+            result.innerHTML =
+                "Resume Uploaded Successfully!<br>" +
+                "File Name: " + file.name + "<br>" +
+                "File Size: " + (file.size / 1024).toFixed(2) + " KB";
+        }
+    </script>
+
+</body>
+</html>
