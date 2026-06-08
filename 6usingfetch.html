@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AbortController Demo</title>
+</head>
+<body>
+
+<h2>Abort Controller Test</h2>
+
+<script>
+"use strict";
+
+(async () => {
+
+  const controller = new AbortController();
+  setTimeout(() => {
+    controller.abort();
+  }, 1000);
+
+  try {
+    console.log("Request started...");
+    let response = await fetch("https://httpbin.org/delay/5", {
+      signal: controller.signal
+    });
+
+    let data = await response.json();
+    console.log("Success:", data);
+
+  } catch (err) {
+
+    if (err.name === "AbortError") {
+      alert("Request Aborted!");
+      console.log("Aborted successfully");
+    } else {
+      console.error("Other error:", err);
+    }
+  }
+
+})();
+</script>
+
+</body>
+</html>
