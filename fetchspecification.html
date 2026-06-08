@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict"
+       (async () => {
+let response = await fetch('/article/fetch/logo-fetch.svg');
+
+let blob = await response.blob(); // download as Blob object
+
+// create <img> for it
+let img = document.createElement('img');
+img.style = 'position:fixed;top:10px;left:10px;width:100px';
+document.body.append(img);
+
+// show it
+img.src = URL.createObjectURL(blob);
+
+setTimeout(() => { // hide after three seconds
+  img.remove();
+  URL.revokeObjectURL(img.src);
+}, 3000);
+})()
+    </script>
+</body>
+</html>
