@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Long Polling Example</title>
+</head>
+<body>
+<h2>Long Polling Demo</h2>
+<div id="result">Waiting for messages...</div>
+<script>
+async function longPoll() {
+    try {
+        let response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+        if (response.status === 200) {
+            let data = await response.json();
+            document.getElementById("result").innerHTML =
+                "Message: " + data.title;
+            setTimeout(longPoll, 3000);
+        }
+    } catch (error) {
+        console.log("Error:", error);
+        setTimeout(longPoll, 3000);
+    }
+}
+longPoll();
+</script>
+</body>
+</html>
