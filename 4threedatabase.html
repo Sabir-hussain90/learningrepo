@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Open Database Example</title>
+</head>
+<body>
+<h2>IndexedDB Example</h2>
+<p id="output"></p>
+
+<script>
+    let request = indexedDB.open("StudentDB", 1);
+    request.onupgradeneeded = function(event) {
+        let db = event.target.result;
+
+        if (!db.objectStoreNames.contains("students")) {
+            db.createObjectStore("students", { keyPath: "id" });
+        }
+    };
+    request.onsuccess = function(event) {
+        let db = event.target.result;
+        document.getElementById("output").innerHTML =
+            "Database opened successfully!";
+        console.log("Database opened:", db);
+    };
+    request.onerror = function(event) {
+        console.log("Error:", event.target.error);
+    };
+</script>
+
+</body>
+</html>
