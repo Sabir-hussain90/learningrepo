@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict"
+        let socket = new WebSocket("wss://javascript.info/article/websocket/demo/hello");
+        socket.onopen=function(e){
+            alert("[open] Connection established");
+            alert("sending to server");
+            socket.send("my name is sabir");
+        };
+        socket.onmessage=function(event){
+            alert(`[message] data recieved from the server:${event.data}`);};
+            socket.onclose=function(event){
+                if(event.WasClean){
+                    alert(`[close] Connection closed Cleanely,code=${event.code}reason=${event.reason}`);
+                }else{
+                    alert('[closed] connection died')
+                }
+            };
+            socket.onerror=function(error){
+                alert(`[error]`);
+            }
+        
+    </script>
+</body>
+</html>
