@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="person">
+        <input type="text" name="sabir">
+        <input type="text" last="hussain">
+    </form>
+    <script>
+        "use strict"
+        let formData= new formData(document.forms.person);
+        formData.append("middle","lee")
+        let xhr = new XMLHttpRequest();
+        xhr.open("post","/article/xmlhttprequest/post/user");
+        xhr.onload=()=>alert(xhr.response);
+
+    </script>
+    
+</body>
+</html>
