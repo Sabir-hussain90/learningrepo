@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    "use strict"
+    let xhr =new XMLHttpRequest();
+    xhr.open('get','article/xmlhttprequest/example/load');
+    xhr.send();
+    xhr.onload=function(){
+        if(xhr.status!=200){
+            alert(`Error${xhr.status}:${xhr.statusText}`);
+
+        } else{
+            alert(`Done,got ${xhr.response.length}bytes`);
+
+        }
+
+    }
+    xhr.onprogress=function(event){
+        if(event.lengthComputable){
+            alert(`Recieved${event.loaded}of${event.total} bytes`);
+        }else{
+            alert(`Received${event.loaded}bytes`)
+        }
+    };
+    xhr.onerror=function(){
+        alert("Request Failed")
+    };
+</script>
+</body>
+</html>
