@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brick Animation</title>
+
+<style>
+#path {
+    position: relative;
+    width: 540px;
+    height: 20px;
+    outline: 1px solid red;
+}
+
+#brick {
+    width: 40px;
+    height: 20px;
+    background: black;
+    position: absolute;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div id="path">
+    <div id="brick"></div>
+</div>
+
+<script>
+let brick = document.getElementById("brick");
+
+// animation engine
+function animate({ duration, timing, draw }) {
+    let start = performance.now();
+
+    requestAnimationFrame(function frame(time) {
+        let timeFraction = (time - start) / duration;
+        if (timeFraction > 1) timeFraction = 1;
+
+        let progress = timing(timeFraction);
+        draw(progress);
+
+        if (timeFraction < 1) {
+            requestAnimationFrame(frame);
+        }
+    });
+}
+
+// bounce function
+function bounce(timeFraction) {
+    for (let a = 0, b = 1; 1; a += b, b /= 2) {
+        if (timeFraction >= (7 - 4 * a) / 11) {
+            return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2);
+        }
+    }
+}
+
+// ease in out wrapper
+function makeEaseInOut(timing) {
+    return function(timeFraction) {
+        if (timeFraction < 0.5)
+            return timing(2 * timeFraction) / 2;
+        else
+            return (2 - timing(2 * (1 - timeFraction))) / 2;
+    };
+}
+
+let bounceEaseInOut = makeEaseInOut(bounce);
+
+// click animation
+brick.onclick = function() {
+    animate({
+        duration: 3000,
+        timing: bounceEaseInOut,
+        draw(progress) {
+            brick.style.left = progress * 500 + "px";
+        }
+    });
+};
+</script>
+
+</body>
+</html>
