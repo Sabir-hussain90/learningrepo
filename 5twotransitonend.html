@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Boat Transition</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: skyblue;
+      overflow: hidden;
+    }
+
+    .sea {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .boat {
+      position: absolute;
+      bottom: 50px;
+      left: 0;
+      font-size: 40px;
+      transition: transform 3s linear;
+    }
+
+    /* move class */
+    .move {
+      transform: translateX(80vw);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="sea">
+    <div class="boat" id="boat">🚤</div>
+  </div>
+
+  <script>
+    const boat = document.getElementById("boat");
+    document.body.addEventListener("click", () => {
+      boat.classList.toggle("move");
+    });
+  </script>
+
+</body>
+</html>
