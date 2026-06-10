@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://js.cx/libs/animate.js"></script>
+    <style>
+        #brick{
+            width: 40px;
+            height:20px;
+            background-color: black;
+            position: relative;
+            cursor: pointer;
+        }
+        #path{
+            outline: 1px solid red;
+            width: 540px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="path"><div id="brick"></div></div>
+    <script>
+        function makeEaseOut(timing){
+            return function(timeFraction){
+                return 1 -timing(1-timeFraction);
+            }
+        }
+        function bounce(timefraction){
+            for(let a =0, b=1; 1; a+=b,b/=2){
+                if(timefraction>=(7-4*a)/11){
+                    return -Math.pow((11-6*a-11*timefraction)/4,2)+Math.pow(b,2)
+                }
+            }
+        }
+        let bounceEaseOut=makeEaseOut(bounce);
+        brick.onclick=function(){
+            animate({
+                duration:3000,
+                timing:bounceEaseOut,
+                draw:function(progress){
+                    brick.style.left=progress*500+'px'
+                }
+            });
+        };
+    </script>
+    
+</body>
+</html>
