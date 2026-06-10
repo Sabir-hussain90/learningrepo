@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Typing Animation</title>
+
+<style>
+textarea {
+    display: block;
+    border: 1px solid black;
+    color: red;
+    font-size: 110%;
+}
+button {
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<textarea id="textExample" rows="5" cols="60">
+He took his vorpal sword in hand:
+Long time the manxome foe he sought--
+so rested he by the TumTum tree,
+and stood awhile in thought
+</textarea>
+
+<button onclick="animateText(textExample)">Run animated typing</button>
+
+<script>
+
+// animation engine
+function animate({ duration, timing, draw }) {
+    let start = performance.now();
+
+    requestAnimationFrame(function frame(time) {
+        let timeFraction = (time - start) / duration;
+        if (timeFraction > 1) timeFraction = 1;
+
+        let progress = timing(timeFraction);
+        draw(progress);
+
+        if (timeFraction < 1) {
+            requestAnimationFrame(frame);
+        }
+    });
+}
+
+function animateText(textArea) {
+    let text = textArea.value;
+
+    let to = text.length;
+    let from = 0;
+
+    animate({
+        duration: 5000,
+        timing: bounce,
+        draw(progress) {
+            let result = (to - from) * progress + from;
+            textArea.value = text.slice(0, Math.ceil(result));
+        }
+    });
+}
+
+function bounce(timeFraction) {
+    for (let a = 0, b = 1; 1; a += b, b /= 2) {
+        if (timeFraction >= (7 - 4 * a) / 11) {
+            return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2);
+        }
+    }
+}
+
+</script>
+
+</body>
+</html>
