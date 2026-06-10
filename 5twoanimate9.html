@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digit Animation</title>
+
+    <style>
+        #digit {
+            width: .5em;
+            overflow: hidden;
+            font: 32px monospace;
+            cursor: pointer;
+        }
+
+        #stripe {
+            display: inline-block;
+        }
+
+        #stripe.animate {
+            transform: translateX(-90%);
+            transition-property: transform;
+            transition-duration: 9s;
+            transition-timing-function: steps(9, start);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="digit">
+        <div id="stripe">0123456789</div>
+    </div>
+
+    <script>
+        const digit = document.getElementById("digit");
+        const stripe = document.getElementById("stripe");
+
+        digit.onclick = function () {
+            // restart animation every click
+            stripe.classList.remove("animate");
+            void stripe.offsetWidth; // force reflow (restart trick)
+            stripe.classList.add("animate");
+        };
+    </script>
+
+</body>
+</html>
