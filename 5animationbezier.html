@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<canvas id="canvas" width="500" height="300" style="border:1px solid black"></canvas>
+<script>
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
+let t = 0;
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+// Quadratic Bezier Formula
+    let x = (1 - t) * (1 - t) * 50 +
+            2 * (1 - t) * t * 250 +
+            t * t * 450;
+
+    let y = (1 - t) * (1 - t) * 250 +
+            2 * (1 - t) * t * 50 +
+            t * t * 250;
+
+    // Draw moving ball
+    ctx.beginPath();
+    ctx.arc(x, y, 10, 0, Math.PI * 2);
+    ctx.fill();
+
+    t += 0.01;
+
+    if (t <= 1) {
+        requestAnimationFrame(animate);
+      }
+}
+animate();
+</script>
+
+</body>
+</html>
