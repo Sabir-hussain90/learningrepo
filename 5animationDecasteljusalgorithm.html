@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="canvas" width="500" height="400" style="border:1px solid black"></canvas>
+<br>
+<button onclick="start()">Play</button>
+
+<script>
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
+
+// Triangle points
+let A = { x: 100, y: 300 };
+let B = { x: 250, y: 80 };
+let C = { x: 400, y: 300 };
+
+let t = 0;
+let running = false;
+
+// Linear interpolation (LERP)
+function lerp(p1, p2, t) {
+    return {
+        x: (1 - t) * p1.x + t * p2.x,
+        y: (1 - t) * p1.y + t * p2.y
+    };
+}
+
+// Draw triangle
+function drawTriangle() {
+    ctx.strokeStyle = "black";
+    ctx.beginPath();
+    ctx.moveTo(A.x, A.y);
+    ctx.lineTo(B.x, B.y);
+    ctx.lineTo(C.x, C.y);
+    ctx.lineTo(A.x, A.y);
+    ctx.stroke();
+}
+
+// Animation
+function animate() {
+    if (!running) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    drawTriangle();
+
+    // Moving point using interpolation (De Casteljau idea)
+    let P1 = lerp(A, B, t);
+    let P2 = lerp(B, C, t);
+    let P = lerp(P1, P2, t);
+
+    // Draw moving point
+    ctx.beginPath();
+    ctx.arc(P.x, P.y, 7, 0, Math.PI * 2);
+    ctx.fill();
+
+    t += 0.01;
+
+    if (t <= 1) {
+        requestAnimationFrame(animate);
+    } else {
+        running = false;
+    }
+}
+
+// Start button
+function start() {
+    t = 0;
+    running = true;
+    animate();
+}
+
+// initial draw
+drawTriangle();
+
+</script>
+
+</body>
+</html>
