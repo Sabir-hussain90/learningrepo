@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow DOM Example</title>
+</head>
+<body>
+
+    <div id="elem">Click Me</div>
+
+    <template id="templ">
+        <style>
+            p {
+                font-weight: bold;
+                color: blue;
+            }
+        </style>
+        <p id="message"></p>
+    </template>
+
+    <script>
+        let elem = document.getElementById("elem");
+        let templ = document.getElementById("templ");
+
+        elem.onclick = function () {
+            elem.attachShadow({ mode: 'open' });
+
+            elem.shadowRoot.append(
+                templ.content.cloneNode(true)
+            );
+
+            elem.shadowRoot.getElementById("message").innerHTML =
+                "Hello From the Shadow DOM";
+        };
+    </script>
+
+</body>
+</html>
