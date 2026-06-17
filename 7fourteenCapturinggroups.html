@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+"use strict"
+let str = "1 turkey costs 30€";
+let regexp = /\d+(?=(€|kr))/;
+alert( str.match(regexp) );
+    </script>
+</body>
+</html>
