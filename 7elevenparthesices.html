@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict"
+        let str = '<span class ="my">';
+            let regexp = /<(([a-z]+)\s*([^>]*))>/;
+            let result = str.match(regexp);
+            alert(result[0]);
+            alert(result[1]);
+            alert(result[2]);
+             alert(result[3]);
+    </script>
+    
+</body>
+</html>
